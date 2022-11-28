@@ -23,7 +23,8 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        $employs = Employ::all();
+        //$employs = Employ::all();
+        $employs= Employ::select('name')->get();
         return view('user/create', compact('employs')); 
     }
 
