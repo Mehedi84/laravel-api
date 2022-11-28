@@ -63,9 +63,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($catid)
     {
-        //
+
+        $results = Employ::where('id', $catid)->first();
+        return view('user/edit',compact('results'));
     }
 
     /**
@@ -77,7 +79,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $request->all();
     }
 
     /**
@@ -88,7 +90,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $catid = convert_uudecode($id);
+        $catid = decrypt($id);
         $result = Employ::where('id', $catid)->delete();
         return Redirect()->back();
     }

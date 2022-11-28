@@ -45,8 +45,9 @@
                         <td>{{ $employ->roll }}</td>
                         <td>{{  ($employ->status==1) ? 'Active' : 'Deactive'; }}</td>
                         <td>
-                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                        <form method="POST" action="{{ url('users') }}/{{ convert_uuencode($employ->id) }}">
+                        <a href="{{ url('users/') }}/{{ $employ->id.'/edit' }}" type="button" class="btn btn-primary btn-sm">Edit</a>
+
+                        <form method="POST" action="{{ url('users') }}/{{ encrypt($employ->id) }}">
                         @csrf
                         @method('DELETE')
                         
@@ -67,7 +68,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">User Create</h5>
+        <h5 class="modal-title" id="exampleModalLabel">User <span id="actionData">Create</span></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -105,4 +106,10 @@
     </div>
   </div>
 </div>
+<script>
+function userEditData(id ,name, email, phone, pass, roll, status) {
+  $('#exampleModal').modal('show');
+  $("#actionData").text(email);
+}
+</script>
 @endsection
